@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2020 at 03:21 PM
+-- Generation Time: Apr 24, 2020 at 03:41 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.33
 
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `dokter` (
-  `uDokter` varchar(20) NOT NULL,
+  `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `tipeSunat` varchar(30) NOT NULL,
+  `tipeSunat` varchar(30) DEFAULT NULL,
   `alamat` varchar(50) NOT NULL,
   `saldo` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48,7 +48,7 @@ CREATE TABLE `ordersunat` (
   `uPasien` varchar(20) NOT NULL,
   `uDokter` varchar(20) NOT NULL,
   `tglSunat` date NOT NULL,
-  `harga` int(20) NOT NULL
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -58,11 +58,10 @@ CREATE TABLE `ordersunat` (
 --
 
 CREATE TABLE `pasien` (
-  `uPasien` varchar(20) NOT NULL,
+  `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `alamat` varchar(50) NOT NULL,
-  `tgl_lahir` date NOT NULL,
   `saldo` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -94,7 +93,7 @@ INSERT INTO `tipesunat` (`tipeSunat`, `harga`) VALUES
 -- Indexes for table `dokter`
 --
 ALTER TABLE `dokter`
-  ADD PRIMARY KEY (`uDokter`),
+  ADD PRIMARY KEY (`username`),
   ADD KEY `Fk_tipeSunat` (`tipeSunat`);
 
 --
@@ -109,7 +108,7 @@ ALTER TABLE `ordersunat`
 -- Indexes for table `pasien`
 --
 ALTER TABLE `pasien`
-  ADD PRIMARY KEY (`uPasien`);
+  ADD PRIMARY KEY (`username`);
 
 --
 -- Indexes for table `tipesunat`
@@ -141,8 +140,8 @@ ALTER TABLE `dokter`
 -- Constraints for table `ordersunat`
 --
 ALTER TABLE `ordersunat`
-  ADD CONSTRAINT `Fk_uDokter` FOREIGN KEY (`uDokter`) REFERENCES `dokter` (`uDokter`),
-  ADD CONSTRAINT `Fk_uPasien` FOREIGN KEY (`uPasien`) REFERENCES `pasien` (`uPasien`);
+  ADD CONSTRAINT `Fk_uDokter` FOREIGN KEY (`uDokter`) REFERENCES `dokter` (`username`),
+  ADD CONSTRAINT `Fk_uPasien` FOREIGN KEY (`uPasien`) REFERENCES `pasien` (`username`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
