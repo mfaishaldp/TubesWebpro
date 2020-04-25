@@ -49,7 +49,8 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="col-md-12" style="padding:280px;background:#808080;">
+                <div class="col-md-12" style="padding:40px;background:#808080;">
+                    <img src="<?php echo base_url('assets/img/slidehome.png')?>" class="d-block w-100" alt="..." style="width:300px;height:500px;">
                 </div>
             </div>
         </div>
